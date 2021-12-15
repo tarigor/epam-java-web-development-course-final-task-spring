@@ -1,0 +1,10 @@
+{
+  "COMMON_SITE_ACTIVITY_SERVICE": "com.epam.hotel.service.impl.CommonSiteActivityServiceImpl",
+  "DATABASE_CONNECTION_SERVICE": "com.epam.hotel.service.impl.DatabaseConnectionServiceImpl",
+  "PROPERTIES_FILE_SERVICE": "com.epam.hotel.service.impl.PropertiesFileServiceImpl",
+  "REUSABLE_POOL_SERVICE": "com.epam.hotel.service.impl.ReusablePoolServiceImpl",
+  "CLIENT_SERVICE": "com.epam.hotel.service.impl.ClientServiceImpl",
+  "ROOM_SERVICE": "com.epam.hotel.service.impl.RoomServiceImpl",
+  "BOOK_SERVICE": "com.epam.hotel.service.impl.BookServiceImpl",
+  "ADMIN_SERVICE": "com.epam.hotel.service.impl.AdminServiceImpl"
+}
