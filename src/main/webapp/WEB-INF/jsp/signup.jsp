@@ -26,7 +26,8 @@
 			<link rel="stylesheet" href="css/style.css">
 			<div class="wrapper">
 				<div class="inner">
-					<form:form action="command?name=processForm" modelAttribute="registration">
+					<form:form action="${pageContext.request.contextPath}/command?name=registrationProcessForm"
+					           modelAttribute="registration">
 						
 						<h3>Registration Form</h3>
 						<div class="form-group">
@@ -34,10 +35,11 @@
 								<label>First Name</label>
 								<form:input type="text" class="form-control" path="firstName"
 								            oninput="validateName(this)"/>
-									<c:if test="${fieldErrorList.contains('firstName')}">
-										<label class="text-warning"
-										       style="font-size: xx-small"><f:message key="validator.wrong.user.name.input" bundle="${local}"/></label>
-									</c:if>
+								<c:if test="${fieldErrorList.contains('firstName')}">
+									<label class="text-warning"
+									       style="font-size: xx-small"><f:message key="validator.wrong.user.name.input"
+									                                              bundle="${local}"/></label>
+								</c:if>
 							</div>
 							<div class="form-wrapper">
 								<label>Last Name</label>
@@ -45,7 +47,8 @@
 								            oninput="validateName(this)"/>
 								<c:if test="${fieldErrorList.contains('lastName')}">
 									<label class="text-warning"
-									       style="font-size: xx-small"><f:message key="validator.wrong.user.name.input" bundle="${local}"/></label>
+									       style="font-size: xx-small"><f:message key="validator.wrong.user.name.input"
+									                                              bundle="${local}"/></label>
 								</c:if>
 							</div>
 						</div>
@@ -55,7 +58,8 @@
 							            oninput="validateEmail(this)"/>
 							<c:if test="${fieldErrorList.contains('email')}">
 								<label class="text-warning"
-								       style="font-size: xx-small"><f:message key="validator.wrong.user.email.input" bundle="${local}"/></label>
+								       style="font-size: xx-small"><f:message key="validator.wrong.user.email.input"
+								                                              bundle="${local}"/></label>
 							</c:if>
 						</div>
 						<div class="form-wrapper">
@@ -79,11 +83,13 @@
 						</div>
 						<c:if test="${fieldErrorList.contains('passwordDoubleCheck')}">
 							<label class="text-warning"
-							       style="font-size: xx-small"><f:message key="validator.wrong.user.password.double.check.input" bundle="${local}"/></label>
+							       style="font-size: xx-small"><f:message
+									key="validator.wrong.user.password.double.check.input" bundle="${local}"/></label>
 						</c:if>
 						<c:if test="${fieldErrorList.contains('password')}">
 							<label class="text-warning"
-							       style="font-size: xx-small"><f:message key="validator.wrong.user.password.input" bundle="${local}"/></label>
+							       style="font-size: xx-small"><f:message key="validator.wrong.user.password.input"
+							                                              bundle="${local}"/></label>
 						</c:if>
 						<br>
 						<button type="submit" value="Submit">Register Now</button>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="html" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" trimDirectiveWhitespaces="true" %>
 
 <f:setLocale value="${sessionScope.language}" scope="session"/>
@@ -28,7 +29,8 @@
 			<br>
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
-					<form action="${pageContext.request.contextPath}/command?name=login" method="post">
+					<form:form action="${pageContext.request.contextPath}/command?name=loginProcessForm"
+					           modelAttribute="login">
 						<c:if test="${loginAndCompleteRequest}">
 							<input type="hidden" name="loginAndCompleteRequest" value="${loginAndCompleteRequest}">
 							<input type="hidden" name="persons" value="${clientRequest.getPersons()}">
@@ -43,19 +45,21 @@
 									bundle="${local}"/></label>
 						</c:if>
 						<div class="form-wrapper">
-							<label for=""><f:message key="email" bundle="${local}"/></label>
-							<input type="text" name="email" class="form-control">
-							<c:if test="${emailState}">
+							<label><f:message key="email" bundle="${local}"/></label>
+							<form:input type="text" path="email" class="form-control"/>
+							<c:if test="${fieldErrorList.contains('email')}">
 								<label class="text-warning"
-								       style="font-size: xx-small">${emailDesc}</label>
+								       style="font-size: xx-small"><f:message key="validator.wrong.user.email.input"
+								                                              bundle="${local}"/></label>
 							</c:if>
 						</div>
 						<div class="form-wrapper">
-							<label for=""><f:message key="password" bundle="${local}"/></label>
-							<input type="password" name="password" class="form-control">
-							<c:if test="${passwordState}">
+							<label><f:message key="password" bundle="${local}"/></label>
+							<form:input type="password" path="password" class="form-control"/>
+							<c:if test="${fieldErrorList.contains('password')}">
 								<label class="text-warning"
-								       style="font-size: xx-small">${passwordDesc}</label>
+								       style="font-size: xx-small"><f:message key="validator.wrong.user.password.input"
+								                                              bundle="${local}"/></label>
 							</c:if>
 						</div>
 						<br>
@@ -70,12 +74,13 @@
 							</c:choose>
 						</button>
 						
-						<c:if test="${userIsMissing}">
+						<c:if test="${errorWhileLogin}">
 							<br>
 							<label class="text-warning"
-							       style="font-size: medium"><f:message key="${errorType}" bundle="${local}"/></label>
+							       style="font-size: medium"><f:message key="${errorWhileLoginMessage}"
+							                                            bundle="${local}"/></label>
 						</c:if>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

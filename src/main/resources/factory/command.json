@@ -1,5 +1,5 @@
 {
-  "LOGIN": {
+  "LOGINPROCESSFORM": {
     "clazz": "com.epam.hotel.command.impl.common.LoginCommand",
     "role": "ANYONE"
   },
@@ -7,7 +7,7 @@
     "clazz": "com.epam.hotel.command.impl.common.LogoutCommand",
     "role": "CLIENT,ADMIN"
   },
-  "PROCESSFORM": {
+  "REGISTRATIONPROCESSFORM": {
     "clazz": "com.epam.hotel.command.impl.common.UserRegistrationCommand",
     "role": "ANYONE"
   },
@@ -39,7 +39,7 @@
     "clazz": "com.epam.hotel.command.impl.admincommand.AdminCabinetCommand",
     "role": "ADMIN"
   },
-  "CLIENT_CABINET": {
+  "CLIENTCABINET": {
     "clazz": "com.epam.hotel.command.impl.clientcommand.ClientCabinetCommand",
     "role": "CLIENT"
   },

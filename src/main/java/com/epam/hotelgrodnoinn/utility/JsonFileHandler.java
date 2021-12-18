@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -19,6 +18,7 @@ public class JsonFileHandler {
     }
 
     public HashMap<String, Object> getMapFromJson() throws IOException {
+
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(new FileInputStream(jsonPath), HashMap.class);
     }

@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 public class SiteMenuServiceImpl {
 
     public static final String JSON = "./src/main/resources/factory/menu.json";
+    public static final String ID = "id";
+    public static final String COMMAND = "command";
+    public static final String MENU_ITEM_DESCRIPTION = "menuItemDescription";
+    public static final String ROLE = "role";
     private final JsonFileHandler jsonFileHandler;
     HashMap<String, Menu> menuList;
 
@@ -28,6 +32,7 @@ public class SiteMenuServiceImpl {
 
     @PostConstruct
     public void init() throws IOException {
+
         menuList = new HashMap<>();
         for (MenuItemDescription menuItem : MenuItemDescription.values()) {
             menuList.put(menuItem.name(), getMenu(menuItem.name()));
@@ -35,6 +40,7 @@ public class SiteMenuServiceImpl {
     }
 
     public ArrayList<Menu> getMenuListCollectedByRoleSortedByID(MenuRole... menuRole) {
+
         ArrayList<Menu> sortedMenuListByRole = new ArrayList<>();
         for (MenuRole singleMenuRole : menuRole) {
             for (Map.Entry<String, Menu> entry : this.menuList.entrySet()) {
@@ -49,10 +55,11 @@ public class SiteMenuServiceImpl {
     }
 
     private Menu getMenu(String menuItem) throws IOException {
-            int id = Integer.parseInt(((LinkedHashMap)(jsonFileHandler.getMapFromJson().get(menuItem))).get("id").toString());
-            String pageCommandName = ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get("command").toString();
-            MenuItemDescription menuItemDescription = MenuItemDescription.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get("menuItemDescription").toString());
-            MenuRole menuRole = MenuRole.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get("role").toString());
-            return new Menu(id, pageCommandName, menuItemDescription, menuRole);
+
+        int id = Integer.parseInt(((LinkedHashMap) (jsonFileHandler.getMapFromJson().get(menuItem))).get(ID).toString());
+        String pageCommandName = ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(COMMAND).toString();
+        MenuItemDescription menuItemDescription = MenuItemDescription.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(MENU_ITEM_DESCRIPTION).toString());
+        MenuRole menuRole = MenuRole.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(ROLE).toString());
+        return new Menu(id, pageCommandName, menuItemDescription, menuRole);
     }
 }

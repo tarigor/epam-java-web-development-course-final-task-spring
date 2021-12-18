@@ -32,6 +32,7 @@ public class LanguageInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+
         if (request.getParameter("lang") != null) {
             request.getSession().setAttribute("language", request.getParameter("lang"));
         }

@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 @Component
 public class CommandServiceImpl {
     public static final String JSON = "./src/main/resources/factory/command.json";
+    public static final String ROLE = "role";
     private final JsonFileHandler jsonFileHandler;
 
     public CommandServiceImpl(@Value(value = JSON) JsonFileHandler jsonFileHandler) {
@@ -23,6 +24,7 @@ public class CommandServiceImpl {
      * @return a role of the specific command.
      */
     public String getCommandRole(String command) throws IOException {
-        return ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(command)).get("role").toString();
+
+        return ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(command)).get(ROLE).toString();
     }
 }

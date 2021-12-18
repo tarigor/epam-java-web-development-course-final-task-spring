@@ -11,11 +11,12 @@ import java.util.List;
 @Component
 public class InputValidationImpl {
     public static final String PASSWORD_DOUBLE_CHECK = "passwordDoubleCheck";
-    private ArrayList<String> fieldErrorList = new ArrayList<>();;
+    private ArrayList<String> fieldErrorList = new ArrayList<>();
 
     public ArrayList<String> doValidation(BindingResult bindingResult) {
+
         List<ObjectError> errorList = bindingResult.getAllErrors();
-        FieldError fieldError = null;
+        FieldError fieldError;
         for (ObjectError error : errorList) {
             if (error instanceof FieldError) {
                 fieldError = (FieldError) error;
@@ -33,8 +34,9 @@ public class InputValidationImpl {
      * @return a boolean result of the passwords comparision.
      */
     public boolean validatePasswordTwice(String password, String repeatedPassword) {
+
         fieldErrorList.clear();
-        if(!password.equals(repeatedPassword)){
+        if (!password.equals(repeatedPassword)) {
             fieldErrorList.add(PASSWORD_DOUBLE_CHECK);
         }
         return password.equals(repeatedPassword);

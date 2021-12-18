@@ -9,9 +9,9 @@ public abstract class BaseController {
     @Autowired
     private HttpServletRequest request;
 
-    protected String openPage(String pageName){
-        request.getSession().setAttribute("lastpage",pageName);
-        System.out.println("last page->"+request.getSession().getAttribute("lastpage"));
+    protected String openPage(String pageName) {
+
+        request.getSession().setAttribute("lastpage", pageName);
         return pageName;
     }
 }

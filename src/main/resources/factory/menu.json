@@ -9,7 +9,7 @@
     "id": "2",
     "command": "/command?name=account",
     "menuItemDescription": "ACCOUNT",
-    "role": "CLIENT_LOGGED"
+    "role": "CLIENT"
   },
   "LOG_IN": {
     "id": "3",
@@ -25,9 +25,9 @@
   },
   "CLIENT_CABINET": {
     "id": "3",
-    "command": "/command?name=client_cabinet",
+    "command": "/command?name=clientcabinet",
     "menuItemDescription": "CLIENT_CABINET",
-    "role": "CLIENT_LOGGED"
+    "role": "CLIENT"
   },
   "ADMIN_CABINET": {
     "id": "3",

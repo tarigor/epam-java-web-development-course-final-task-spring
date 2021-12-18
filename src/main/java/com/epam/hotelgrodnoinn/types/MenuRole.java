@@ -6,7 +6,7 @@ package com.epam.hotelgrodnoinn.types;
 public enum MenuRole {
     COMMON,
     ANYONE_NOT_LOGGED,
-    CLIENT_LOGGED,
+    CLIENT,
     ADMIN_LOGGED,
     ANYONE_LOGGED
 }

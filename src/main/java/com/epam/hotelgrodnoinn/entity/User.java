@@ -1,9 +1,7 @@
 package com.epam.hotelgrodnoinn.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Objects;
 
 /**
@@ -66,6 +64,13 @@ public class User {
         this.email = email;
         this.password = password;
         this.account = account;
+    }
+
+    public User(
+            @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}") String email,
+            @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+!=])(?=\\S+$).{4,}$") String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public long getUserID() {

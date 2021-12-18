@@ -2,6 +2,7 @@ package com.epam.hotelgrodnoinn.controller.interceptor;
 
 import com.epam.hotelgrodnoinn.entity.User;
 import com.epam.hotelgrodnoinn.service.impl.CommandServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
+@Slf4j
 public class CommandInterceptor implements HandlerInterceptor {
 
     @Autowired
@@ -40,25 +42,26 @@ public class CommandInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+
         String command = request.getParameter("name");
-        System.out.println("command detected->" + command);
-        System.out.println("command role -> " + commandService.getCommandRole(command.toUpperCase()));
+        log.info("command detected -> {}", command);
+        log.info("command role -> {}", commandService.getCommandRole(command.toUpperCase()));
         User user = (User) request.getSession().getAttribute("user");
-        if(checkCommandRole(user,command)){
-            System.out.println("user has right to invoke this command");
+        if (checkCommandRole(user, command)) {
+            log.info("user has rights to invoke this command");
             return true;
-        }else {
-            System.out.println("there is no rights to invoke this command");
+        } else {
+            log.warn("there is no rights to invoke this command");
         }
         return true;
     }
 
     private boolean checkCommandRole(User user, String command) throws IOException {
+
         String commandRole = commandService.getCommandRole(command.toUpperCase());
-        if(commandRole.contains("ANYONE")){
+        if (commandRole.contains("ANYONE")) {
             return true;
         }
         return commandRole.contains(user.getUserType());
     }
-
 }

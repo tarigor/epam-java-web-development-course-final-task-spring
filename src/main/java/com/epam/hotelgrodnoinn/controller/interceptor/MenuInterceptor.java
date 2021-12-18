@@ -1,6 +1,5 @@
 package com.epam.hotelgrodnoinn.controller.interceptor;
 
-import com.epam.hotelgrodnoinn.entity.Menu;
 import com.epam.hotelgrodnoinn.entity.User;
 import com.epam.hotelgrodnoinn.service.impl.SiteMenuServiceImpl;
 import com.epam.hotelgrodnoinn.types.MenuRole;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 
 @Component
 public class MenuInterceptor implements HandlerInterceptor {
@@ -41,7 +39,8 @@ public class MenuInterceptor implements HandlerInterceptor {
      * @throws Exception in case of errors
      */
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+
         User loggedUser = (User) request.getSession().getAttribute("user");
         if (loggedUser != null) {
             UserType userRole = UserType.valueOf(loggedUser.getUserType());
@@ -53,8 +52,12 @@ public class MenuInterceptor implements HandlerInterceptor {
             } else if (userRole.equals(UserType.CLIENT)) {
                 request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(
                         MenuRole.COMMON,
-                        MenuRole.CLIENT_LOGGED,
+                        MenuRole.CLIENT,
                         MenuRole.ANYONE_LOGGED));
+            } else {
+                request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(
+                        MenuRole.COMMON,
+                        MenuRole.ANYONE_NOT_LOGGED));
             }
         } else {
             request.getSession().setAttribute("menuList", siteMenuService.getMenuListCollectedByRoleSortedByID(

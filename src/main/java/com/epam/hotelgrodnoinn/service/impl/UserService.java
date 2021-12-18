@@ -2,14 +2,16 @@ package com.epam.hotelgrodnoinn.service.impl;
 
 import com.epam.hotelgrodnoinn.entity.User;
 import com.epam.hotelgrodnoinn.repa.ClientRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
+import javax.persistence.EntityNotFoundException;
 
 @Service
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -25,8 +27,7 @@ public class UserService {
 
 
     public void doNewUserRegistration(User user) {
-        System.out.println("result->"+passwordEncoder.matches("Qwer1234!","$2a$10$q6Q7lp.by6iPVxJcsjJBJOVsE1ub2wNLbUBj89oC.Kx95RNZkDUSa"));
-        System.out.println("password->"+passwordEncoder.encode(user.getPassword()));
+
         User userToDb = new User(
                 user.hashCode(),
                 user.getFirstName(),
@@ -36,5 +37,21 @@ public class UserService {
                 passwordEncoder.encode(user.getPassword()),
                 0.0);
         userRepository.save(userToDb);
+    }
+
+    public Object checkUserExisting(User user) {
+
+        try {
+            User userFromDb = userRepository.getById((long) user.hashCode());
+            if (passwordEncoder.matches(user.getPassword(), userFromDb.getPassword())) {
+                log.info("there is such a user");
+                return userFromDb;
+            } else {
+                return "login.wrong.password";
+            }
+        } catch (EntityNotFoundException ignored) {
+            log.warn("no such a user");
+            return "login.no.such.user";
+        }
     }
 }

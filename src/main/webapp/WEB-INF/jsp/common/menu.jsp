@@ -10,10 +10,10 @@
 				<c:when test="${sessionScope.user==null}">
 					<a><f:message key="header.hello.guest" bundle="${local}"/>!</a>
 				</c:when>
-				<c:when test="${sessionScope.user.getUserType().name().contains('ADMIN')}">
+				<c:when test="${sessionScope.user.getUserType().contains('ADMIN')}">
 					<a><f:message key="header.hello.admin" bundle="${local}"/>!</a>
 				</c:when>
-				<c:when test="${sessionScope.user.getUserType().name().contains('CLIENT')}">
+				<c:when test="${sessionScope.user.getUserType().contains('CLIENT')}">
 					<a><f:message key="header.hello"
 					              bundle="${local}"/> ${sessionScope.user.getFirstName()} ${sessionScope.user.getLastName()}!</a>
 				</c:when>
@@ -43,7 +43,7 @@
 			
 			<div class="u-custom-menu u-nav-container">
 				<ul class="u-nav u-spacing-20 u-unstyled u-nav-1">
-					<c:forEach items="${menuList}" var="item">
+					<c:forEach items="${sessionScope.menuList}" var="item">
 						<li class="u-nav-item">
 							<a class="u-border-active-palette-1-base u-border-hover-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
 							   href="${pageContext.request.contextPath}${item.getCommand()}&lang=${sessionScope.language}"
@@ -62,7 +62,7 @@
 					<div class="u-inner-container-layout u-sidenav-overflow">
 						<div class="u-menu-close"></div>
 						<ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-							<c:forEach items="${menuList}" var="item">
+							<c:forEach items="${sessionScope.menuList}" var="item">
 								<li class="u-nav-item">
 									<a class="u-button-style u-nav-link"
 									   href="${item.getCommand()}&lang=${sessionScope.language}"
