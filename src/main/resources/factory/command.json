@@ -54,5 +54,9 @@
   "PAY": {
     "clazz": "com.epam.hotel.command.impl.clientcommand.PayCommand",
     "role": "CLIENT"
+  },
+  "INVOICE": {
+    "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
+    "role": "CLIENT"
   }
 }

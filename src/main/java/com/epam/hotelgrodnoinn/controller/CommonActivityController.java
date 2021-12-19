@@ -1,17 +1,14 @@
 package com.epam.hotelgrodnoinn.controller;
 
 import com.epam.hotelgrodnoinn.entity.User;
+import com.epam.hotelgrodnoinn.service.UserService;
 import com.epam.hotelgrodnoinn.service.impl.InputValidationImpl;
-import com.epam.hotelgrodnoinn.service.impl.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,7 +45,10 @@ public class CommonActivityController extends BaseController {
     }
 
     @PostMapping("/loginProcessForm")
-    public String doLogin(@Valid @ModelAttribute("login") User user, BindingResult bindingResult, HttpSession session, Model model) {
+    public String doLogin(
+            @Valid @ModelAttribute("login") User user,
+            @RequestParam(name = "loginAndCompleteRequest", required = false) String loginAndCompleteRequest,
+            BindingResult bindingResult, HttpSession session, Model model) {
 
         if (bindingResult.hasErrors()) {
             log.warn("input fault while login detected");
@@ -63,6 +63,9 @@ public class CommonActivityController extends BaseController {
             User loggedUser = (User) result;
             session.setAttribute("user", loggedUser);
             if (loggedUser.getUserType().equals("CLIENT")) {
+                if (Boolean.parseBoolean(loginAndCompleteRequest)) {
+                    return "forward:/request_logged_user";
+                }
                 return "redirect:/clientcabinet";
             } else {
                 return "forward:/admin/cabinet";
@@ -75,7 +78,7 @@ public class CommonActivityController extends BaseController {
         }
     }
 
-    @GetMapping("/login")
+    @RequestMapping("/login")
     public String doLogin(Model model) {
 
         model.addAttribute("login", new User());
@@ -89,5 +92,23 @@ public class CommonActivityController extends BaseController {
         session.invalidate();
         model.addAttribute("login", new User());
         return "redirect:/login";
+    }
+
+    @RequestMapping("/request")
+    public String doRequest(@RequestParam(name = "persons") String persons,
+                            @RequestParam(name = "roomClass") String roomClass,
+                            @RequestParam(name = "datefilter") String dateFilter,
+                            HttpServletRequest request) {
+
+        request.setAttribute("persons", persons);
+        request.setAttribute("roomClass", roomClass);
+        request.setAttribute("datefilter", dateFilter);
+        User loggedUser = (User) request.getSession().getAttribute("user");
+        if (loggedUser == null) {
+            request.setAttribute("loginAndCompleteRequest", true);
+            return "forward:/login";
+        } else {
+            return "forward:/request_logged_user";
+        }
     }
 }

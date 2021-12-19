@@ -33,10 +33,9 @@
 					           modelAttribute="login">
 						<c:if test="${loginAndCompleteRequest}">
 							<input type="hidden" name="loginAndCompleteRequest" value="${loginAndCompleteRequest}">
-							<input type="hidden" name="persons" value="${clientRequest.getPersons()}">
-							<input type="hidden" name="roomClass" value="${clientRequest.getRoomClass()}">
-							<input type="hidden" name="dateFrom" value="${clientRequest.getDateFrom()}">
-							<input type="hidden" name="dateTo" value="${clientRequest.getDateTo()}">
+							<input type="hidden" name="persons" value="${persons}">
+							<input type="hidden" name="roomClass" value="${roomClass}">
+							<input type="hidden" name="datefilter" value="${datefilter}">
 						</c:if>
 						<h3 class="text-center"><f:message key="login.login" bundle="${local}"/></h3>
 						<c:if test="${registrationCompleted}">

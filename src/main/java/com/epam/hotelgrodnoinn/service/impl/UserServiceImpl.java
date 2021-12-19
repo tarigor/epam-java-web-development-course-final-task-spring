@@ -2,6 +2,7 @@ package com.epam.hotelgrodnoinn.service.impl;
 
 import com.epam.hotelgrodnoinn.entity.User;
 import com.epam.hotelgrodnoinn.repa.ClientRepository;
+import com.epam.hotelgrodnoinn.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 
 @Service
 @Slf4j
-public class UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     ClientRepository userRepository;
@@ -20,12 +21,14 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     @Transactional
     public User getUserById(Long id) {
         return userRepository.findById(id).get();
     }
 
 
+    @Override
     public void doNewUserRegistration(User user) {
 
         User userToDb = new User(
@@ -39,6 +42,7 @@ public class UserService {
         userRepository.save(userToDb);
     }
 
+    @Override
     public Object checkUserExisting(User user) {
 
         try {

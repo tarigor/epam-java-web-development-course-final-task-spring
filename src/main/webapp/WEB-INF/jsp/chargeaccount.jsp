@@ -28,7 +28,7 @@
 			<br>
 			<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
 				<div class="inner">
-					<form action="${pageContext.request.contextPath}/command?name=top_up&userID=${sessionScope.user.getUserID()}"
+					<form action="${pageContext.request.contextPath}/top_up"
 					      method="post">
 						<h3 class="text-center"><f:message key="account.page.name" bundle="${local}"/></h3>
 						<div class="form-wrapper">
@@ -43,8 +43,11 @@
 							       class="form-control text-center align-middle">${String.format("%.2f",sessionScope.user.getAccount())}
 								USD</label>
 							<a class=" text-center"><f:message key="account.charge.balance" bundle="${local}"/>:</a>
-							<input for="" name="chargeAmount"
+							<input name="chargeAmount"
 							       class="form-control text-center align-middle">
+							<c:if test="${error}">
+								<label class="text-warning"><f:message key="error.number" bundle="${local}"/></label>
+							</c:if>
 						</div>
 						<div class="form-wrapper">
 							<button type="submit"

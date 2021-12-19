@@ -98,8 +98,7 @@
 					<th style="text-align: center">
 						<a>
 							<c:if test="${clientOrder.isPaymentRequired()}">
-								<a href="<c:url value="${pageContext.request.contextPath}/command?name=account
-								&orderPrepare=true
+								<a href="<c:url value="${pageContext.request.contextPath}/command?name=invoice
 								&orderID=${clientOrder.getOrderID()}
 								&requestID=${clientOrder.getRequestID()}
 								&roomID=${clientOrder.getRoomID()}

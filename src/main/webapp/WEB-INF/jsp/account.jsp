@@ -43,7 +43,8 @@
 								USD</label>
 						</div>
 						<div class="form-wrapper">
-							<a href="<c:url value="${pageContext.request.contextPath}/command?name=top_up&user=${sessionScope.user.getUserID()}"/>"
+<%--							<a href="<c:url value="${pageContext.request.contextPath}/command?name=top_up&user=${sessionScope.user.getUserID()}"/>"--%>
+							<a href="<c:url value="${pageContext.request.contextPath}/page?name=chargeaccount"/>"
 							   class="btn btn-success form-control text-center align-middle"
 							   style="text-align: center;color: white"><f:message
 									key="account.charge.button"
@@ -53,7 +54,7 @@
 							<label style="text-align: center;font-size: medium;color: #62C584"><f:message
 									key="account.charged"
 									bundle="${local}"/></label>
-							<a href="<c:url value="${pageContext.request.contextPath}/command?name=client_cabinet"/>"
+							<a href="<c:url value="${pageContext.request.contextPath}/clientcabinet"/>"
 							   class="btn btn-secondary form-control text-center align-middle"
 							   style="text-align: center;color: black"><f:message
 									key="account.back.to.client.cabinet"
@@ -63,7 +64,7 @@
 							<label style="text-align: center;font-size: medium;color: #62C584 "><f:message
 									key="account.paid"
 									bundle="${local}"/></label>
-							<a href="<c:url value="${pageContext.request.contextPath}/command?name=client_cabinet"/>"
+							<a href="<c:url value="${pageContext.request.contextPath}/clientcabinet"/>"
 							   class="btn btn-secondary form-control text-center align-middle"
 							   style="text-align: center;color: black"><f:message
 									key="account.back.to.client.cabinet"

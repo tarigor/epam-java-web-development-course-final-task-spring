@@ -43,7 +43,7 @@
 								USD</label>
 						</div>
 						<div class="form-wrapper">
-							<a href="<c:url value="${pageContext.request.contextPath}/command?name=top_up&user=${sessionScope.user.getUserID()}"/>"
+							<a href="<c:url value="${pageContext.request.contextPath}/page?name=chargeaccount"/>"
 							   class="btn btn-success form-control text-center align-middle"
 							   style="text-align: center;color: white"><f:message
 									key="account.charge.button"

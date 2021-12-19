@@ -7,6 +7,7 @@ import java.sql.Date;
 @Table(name = "orders")
 public class Order {
     @Id
+    @org.springframework.data.annotation.Transient
     private Long id;
     @Column(name = "client_order_id")
     private Integer clientOrderID;
