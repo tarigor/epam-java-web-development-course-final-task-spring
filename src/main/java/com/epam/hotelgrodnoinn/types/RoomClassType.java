@@ -3,14 +3,14 @@ package com.epam.hotelgrodnoinn.types;
 /**
  * Provides an ENUMs of the available room's classes.
  */
-public enum RoomClass {
+public enum RoomClassType {
     SINGLE("single"),
     DOUBLE("double"),
     SUITE("suite"),
     DELUXE("deluxe");
     String description;
 
-    RoomClass(String description) {
+    RoomClassType(String description) {
         this.description = description;
     }
 

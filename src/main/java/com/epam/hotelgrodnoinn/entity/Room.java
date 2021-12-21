@@ -1,7 +1,6 @@
 package com.epam.hotelgrodnoinn.entity;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "room")
@@ -17,17 +16,16 @@ public class Room {
     @Column(name = "persons_in_room")
     private Integer persons;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
-    private Set<Order> orders;
+//    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+//    private Set<Order> orders;
 
     public Room() {
     }
 
-    public Room(RoomClass roomClass, Double roomCost, Integer persons, Set<Order> orders) {
+    public Room(RoomClass roomClass, Double roomCost, Integer persons) {
         this.roomClass = roomClass;
         this.roomCost = roomCost;
         this.persons = persons;
-        this.orders = orders;
     }
 
     public RoomClass getRoomClass() {
@@ -54,21 +52,12 @@ public class Room {
         this.persons = persons;
     }
 
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Set<Order> orders) {
-        this.orders = orders;
-    }
-
     @Override
     public String toString() {
         return "Room{" +
                 "roomClass=" + roomClass +
                 ", roomCost=" + roomCost +
                 ", persons=" + persons +
-                ", orders=" + orders +
                 '}';
     }
 }

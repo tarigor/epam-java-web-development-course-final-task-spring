@@ -4,16 +4,15 @@ import com.epam.hotelgrodnoinn.types.OrderStatus;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Component
 public class ClientRequestView {
-
-    public static final String PATTERN = "yyyy-MM-dd";
-    public static final String REGEX = ",";
-    private Integer requestID;
-    private Integer persons;
+    private long requestID;
+    private long clientID;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private int persons;
     private String roomClass;
     private Date dateFrom;
     private Date dateTo;
@@ -23,56 +22,79 @@ public class ClientRequestView {
     public ClientRequestView() {
     }
 
-    public ClientRequestView(String string) {
-        String[] array = string.split(REGEX);
-        this.requestID = Integer.valueOf(array[0]);
-        this.persons = Integer.valueOf(array[1]);
-        this.roomClass = array[2];
-        this.dateFrom = convertStringToSqlDate(array[3]);
-        this.dateTo = convertStringToSqlDate(array[4]);
-        this.requestStatus = OrderStatus.valueOf(array[5]);
+    public ClientRequestView(long requestID, long clientID, String firstName, String lastName, String email, int persons, String roomClass, Date dateFrom, Date dateTo, OrderStatus requestStatus) {
+        this.requestID = requestID;
+        this.clientID = clientID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.persons = persons;
+        this.roomClass = roomClass;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.requestStatus = requestStatus;
         if (requestStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
             setProcessed(true);
         }
     }
 
-    protected static Date convertStringToSqlDate(String date) {
-        SimpleDateFormat formatter = new SimpleDateFormat(PATTERN);
-        Date dateSQL = null;
-        try {
-            java.util.Date dateUtil = formatter.parse(date);
-            dateSQL = new Date(dateUtil.getTime());
-        } catch (ParseException e) {
-            e.getStackTrace();
+    public ClientRequestView(long requestID, int persons, String roomClass, Date dateFrom, Date dateTo, OrderStatus requestStatus) {
+        this.requestID = requestID;
+        this.persons = persons;
+        this.roomClass = roomClass;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.requestStatus = requestStatus;
+        if (requestStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
+            setProcessed(true);
         }
-        return dateSQL;
     }
 
-    public ClientRequestView setResult(String string) {
-        return new ClientRequestView(string);
-    }
-
-    public boolean isProcessed() {
-        return processed;
-    }
-
-    public void setProcessed(boolean processed) {
-        this.processed = processed;
-    }
-
-    public Integer getRequestID() {
+    public long getRequestID() {
         return requestID;
     }
 
-    public void setRequestID(Integer requestID) {
+    public void setRequestID(long requestID) {
         this.requestID = requestID;
     }
 
-    public Integer getPersons() {
+    public long getClientID() {
+        return clientID;
+    }
+
+    public void setClientID(long clientID) {
+        this.clientID = clientID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getPersons() {
         return persons;
     }
 
-    public void setPersons(Integer persons) {
+    public void setPersons(int persons) {
         this.persons = persons;
     }
 
@@ -108,15 +130,28 @@ public class ClientRequestView {
         this.requestStatus = requestStatus;
     }
 
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+
     @Override
     public String toString() {
-        return "ClientRequestQuery{" +
-                "requestId=" + requestID +
+        return "ClientRequestDAO{" +
+                "requestID=" + requestID +
+                ", clientID=" + clientID +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", persons=" + persons +
                 ", roomClass='" + roomClass + '\'' +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
-                ", requestStatus='" + requestStatus + '\'' +
+                ", requestStatus=" + requestStatus +
+                ", processed=" + processed +
                 '}';
     }
 }

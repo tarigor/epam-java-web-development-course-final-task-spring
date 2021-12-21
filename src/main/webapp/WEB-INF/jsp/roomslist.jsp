@@ -77,9 +77,9 @@
 											key="${clientRequest.getRequestStatus().getDescription()}"
 											bundle="${local}"/></th>
 									<th style="text-align: center">
-										<a href="<c:url value="${pageContext.request.contextPath}/command?name=request_handling"/>">
+										<a href="<c:url value="${pageContext.request.contextPath}/command?name=reject&request=${clientRequest.getRequestID()}"/>">
 											<button type="button" class="btn btn-warning"><f:message
-													key="roomslist.request.cancel"
+													key="roomslist.request.reject"
 													bundle="${local}"/></button>
 										</a>
 									</th>

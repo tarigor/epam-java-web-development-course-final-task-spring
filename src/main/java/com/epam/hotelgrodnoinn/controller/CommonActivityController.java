@@ -40,7 +40,7 @@ public class CommonActivityController extends BaseController {
             return "signup";
         } else {
             userService.doNewUserRegistration(user);
-            return "login";
+            return "redirect:/login";
         }
     }
 
@@ -68,7 +68,7 @@ public class CommonActivityController extends BaseController {
                 }
                 return "redirect:/clientcabinet";
             } else {
-                return "forward:/admin/cabinet";
+                return "redirect:/admincabinet";
             }
         } else {
             log.info("error while login -> {}", result);

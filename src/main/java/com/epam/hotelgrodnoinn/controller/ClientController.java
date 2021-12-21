@@ -5,7 +5,6 @@ import com.epam.hotelgrodnoinn.service.impl.ClientServiceImpl;
 import com.epam.hotelgrodnoinn.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,7 +22,7 @@ public class ClientController extends BaseController {
     private OrderServiceImpl orderService;
 
     @RequestMapping(value = "/clientcabinet")
-    public String goClientCabinet(HttpServletRequest request, Model model) {
+    public String goClientCabinet(HttpServletRequest request) {
 
         User loggedUser = (User) request.getSession().getAttribute("user");
         request.getSession().setAttribute("clientRequests", clientService.getClientRequest(loggedUser));

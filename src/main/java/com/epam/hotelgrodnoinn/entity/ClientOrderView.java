@@ -3,15 +3,11 @@ package com.epam.hotelgrodnoinn.entity;
 import com.epam.hotelgrodnoinn.types.OrderStatus;
 import org.springframework.stereotype.Component;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
 public class ClientOrderView {
-    public static final String PATTERN = "yyyy-MM-dd";
-    public static final String REGEX = ",";
-    private int orderID;
+    private long orderID;
     private int requestID;
     private boolean canBeCanceled;
     private String firstName;
@@ -27,15 +23,30 @@ public class ClientOrderView {
     public ClientOrderView() {
     }
 
-    public ClientOrderView(String string) {
-        String[] array = string.split(REGEX);
-        this.orderID = Integer.parseInt(array[0]);
-        this.requestID = Integer.parseInt(array[1]);
-        this.roomID = Integer.parseInt(array[2]);
-        this.roomClass = array[3];
-        this.checkInDate = convertStringToSqlDate(array[4]);
-        this.checkOutDate = convertStringToSqlDate(array[5]);
-        this.orderStatus = OrderStatus.valueOf(array[6]);
+    public ClientOrderView(long orderID, int requestID, String firstName, String lastName, String email, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
+        this.orderID = orderID;
+        this.requestID = requestID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.roomID = roomID;
+        this.roomClass = roomClass;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.orderStatus = orderStatus;
+        if (orderStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
+            setCanBeCanceled(true);
+        }
+    }
+
+    public ClientOrderView(long orderID, int requestID, int roomID, String roomClass, Date checkInDate, Date checkOutDate, OrderStatus orderStatus) {
+        this.orderID = orderID;
+        this.requestID = requestID;
+        this.roomID = roomID;
+        this.roomClass = roomClass;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.orderStatus = orderStatus;
         if (orderStatus.equals(OrderStatus.WAITING_FOR_APPROVAL)) {
             setCanBeCanceled(true);
         }
@@ -44,27 +55,11 @@ public class ClientOrderView {
         }
     }
 
-    protected static java.sql.Date convertStringToSqlDate(String date) {
-        SimpleDateFormat formatter = new SimpleDateFormat(PATTERN);
-        java.sql.Date dateSQL = null;
-        try {
-            java.util.Date dateUtil = formatter.parse(date);
-            dateSQL = new java.sql.Date(dateUtil.getTime());
-        } catch (ParseException e) {
-            e.getStackTrace();
-        }
-        return dateSQL;
-    }
-
-    public ClientOrderView setResult(String string) {
-        return new ClientOrderView(string);
-    }
-
-    public int getOrderID() {
+    public long getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(long orderID) {
         this.orderID = orderID;
     }
 

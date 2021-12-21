@@ -1,7 +1,7 @@
 package com.epam.hotelgrodnoinn.service.impl;
 
+import com.epam.hotelgrodnoinn.dao.OrderDAO;
 import com.epam.hotelgrodnoinn.repa.ClientRepository;
-import com.epam.hotelgrodnoinn.repa.OrderRepository;
 import com.epam.hotelgrodnoinn.repa.RoomRepository;
 import com.epam.hotelgrodnoinn.types.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class OrderServiceImpl {
     @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
     private ClientRepository clientRepository;
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private OrderDAO orderDAO;
 
     @Transactional
     public void payInvoice(long userID, int orderID, int requestID, int roomID, Double roomPrice) {
 
         double changeValue = roomPrice * (-1);
         clientRepository.changeBalance(userID, changeValue);
-        orderRepository.changeStatusOfOrder(OrderStatus.PAID_AND_BOOKED.name(), orderID, requestID, roomID);
+        orderDAO.changeStatusOfOrder(OrderStatus.PAID_AND_BOOKED.name(), orderID, requestID, roomID);
     }
 
     public Double getRoomPrice(Integer roomID) {

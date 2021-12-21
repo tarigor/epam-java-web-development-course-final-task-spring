@@ -31,7 +31,7 @@
   },
   "ADMIN_CABINET": {
     "id": "3",
-    "command": "/command?name=admin_cabinet",
+    "command": "/command?name=admincabinet",
     "menuItemDescription": "ADMIN_CABINET",
     "role": "ADMIN_LOGGED"
   },

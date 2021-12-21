@@ -35,7 +35,7 @@
     "clazz": "com.epam.hotel.command.impl.admincommand.RequestHandlingCommand",
     "role": "ADMIN"
   },
-  "ADMIN_CABINET": {
+  "ADMINCABINET": {
     "clazz": "com.epam.hotel.command.impl.admincommand.AdminCabinetCommand",
     "role": "ADMIN"
   },
@@ -58,5 +58,9 @@
   "INVOICE": {
     "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
     "role": "CLIENT"
+  },
+  "REJECT": {
+    "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
+    "role": "ADMIN"
   }
 }
