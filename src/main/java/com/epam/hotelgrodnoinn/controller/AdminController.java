@@ -3,8 +3,8 @@ package com.epam.hotelgrodnoinn.controller;
 import com.epam.hotelgrodnoinn.entity.ClientRequestView;
 import com.epam.hotelgrodnoinn.entity.RoomData;
 import com.epam.hotelgrodnoinn.entity.RoomView;
-import com.epam.hotelgrodnoinn.service.impl.AdminServiceImpl;
-import com.epam.hotelgrodnoinn.service.impl.RoomServiceImpl;
+import com.epam.hotelgrodnoinn.service.IAdminService;
+import com.epam.hotelgrodnoinn.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +17,9 @@ import java.util.List;
 public class AdminController extends BaseController {
 
     @Autowired
-    private AdminServiceImpl adminService;
+    private IAdminService adminService;
     @Autowired
-    private RoomServiceImpl roomService;
+    private IRoomService roomService;
 
     @RequestMapping(value = "admincabinet")
     public String goAdminCabinet(HttpServletRequest request) {

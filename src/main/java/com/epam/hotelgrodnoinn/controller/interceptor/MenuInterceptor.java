@@ -1,7 +1,7 @@
 package com.epam.hotelgrodnoinn.controller.interceptor;
 
 import com.epam.hotelgrodnoinn.entity.User;
-import com.epam.hotelgrodnoinn.service.impl.SiteMenuServiceImpl;
+import com.epam.hotelgrodnoinn.service.ISiteMenuService;
 import com.epam.hotelgrodnoinn.types.MenuRole;
 import com.epam.hotelgrodnoinn.types.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class MenuInterceptor implements HandlerInterceptor {
     @Autowired
-    private SiteMenuServiceImpl siteMenuService;
+    private ISiteMenuService siteMenuService;
 
     /**
      * Interception point before the execution of a handler. Called after

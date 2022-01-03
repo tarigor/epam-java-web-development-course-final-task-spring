@@ -2,7 +2,7 @@ package com.epam.hotelgrodnoinn.service.impl;
 
 import com.epam.hotelgrodnoinn.entity.User;
 import com.epam.hotelgrodnoinn.repa.ClientRepository;
-import com.epam.hotelgrodnoinn.service.UserService;
+import com.epam.hotelgrodnoinn.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +13,7 @@ import javax.persistence.EntityNotFoundException;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     ClientRepository userRepository;

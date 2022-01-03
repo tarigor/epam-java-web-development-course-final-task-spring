@@ -1,66 +1,50 @@
 {
   "LOGINPROCESSFORM": {
-    "clazz": "com.epam.hotel.command.impl.common.LoginCommand",
     "role": "ANYONE"
   },
   "LOGOUT": {
-    "clazz": "com.epam.hotel.command.impl.common.LogoutCommand",
     "role": "CLIENT,ADMIN"
   },
   "REGISTRATIONPROCESSFORM": {
-    "clazz": "com.epam.hotel.command.impl.common.UserRegistrationCommand",
     "role": "ANYONE"
   },
   "REMOVE_ROOM_FROM_BOOKING": {
-    "clazz": "com.epam.hotel.command.impl.common.RemoveRoomFromBooking",
     "role": "CLIENT"
   },
   "SEND_INVOICE": {
-    "clazz": "com.epam.hotel.command.impl.admincommand.SendInvoiceCommand",
     "role": "ADMIN"
   },
   "ORDER_HANDLING": {
-    "clazz": "com.epam.hotel.command.impl.admincommand.OrderHandlingCommand",
     "role": "ADMIN"
   },
   "REQUEST": {
-    "clazz": "com.epam.hotel.command.impl.common.RequestCommand",
     "role": "ANYONE,CLIENT"
   },
   "CANCEL_REQUEST": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.CancelRequestCommand",
     "role": "CLIENT"
   },
   "REQUEST_HANDLING": {
-    "clazz": "com.epam.hotel.command.impl.admincommand.RequestHandlingCommand",
     "role": "ADMIN"
   },
   "ADMINCABINET": {
-    "clazz": "com.epam.hotel.command.impl.admincommand.AdminCabinetCommand",
     "role": "ADMIN"
   },
   "CLIENTCABINET": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.ClientCabinetCommand",
     "role": "CLIENT"
   },
   "ACCOUNT": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
     "role": "CLIENT"
   },
   "TOP_UP": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.TopUpCommand",
     "role": "CLIENT"
   },
   "PAY": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.PayCommand",
     "role": "CLIENT"
   },
   "INVOICE": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
     "role": "CLIENT"
   },
   "REJECT": {
-    "clazz": "com.epam.hotel.command.impl.clientcommand.AccountCommand",
     "role": "ADMIN"
   }
 }

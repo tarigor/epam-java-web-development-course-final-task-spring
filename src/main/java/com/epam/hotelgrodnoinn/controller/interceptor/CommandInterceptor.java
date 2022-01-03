@@ -1,7 +1,7 @@
 package com.epam.hotelgrodnoinn.controller.interceptor;
 
 import com.epam.hotelgrodnoinn.entity.User;
-import com.epam.hotelgrodnoinn.service.impl.CommandServiceImpl;
+import com.epam.hotelgrodnoinn.service.ICommandService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class CommandInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private CommandServiceImpl commandService;
+    private ICommandService commandService;
 
     /**
      * Interception point before the execution of a handler. Called after

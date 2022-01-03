@@ -7,6 +7,7 @@ import com.epam.hotelgrodnoinn.entity.ClientRequestView;
 import com.epam.hotelgrodnoinn.entity.User;
 import com.epam.hotelgrodnoinn.repa.ClientRepository;
 import com.epam.hotelgrodnoinn.repa.RequestRepository;
+import com.epam.hotelgrodnoinn.service.IClientService;
 import com.epam.hotelgrodnoinn.types.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Component
-public class ClientServiceImpl {
+public class ClientServiceImpl implements IClientService {
 
     @Autowired
     private RequestRepository requestRepository;
@@ -40,28 +41,34 @@ public class ClientServiceImpl {
         return dateSQL;
     }
 
+    @Override
     public List<ClientRequestView> getClientRequest(User user) {
         return clientRequestDAO.getClientRequest(user.getUserID());
     }
 
+    @Override
     public List<ClientOrderView> getClientOrder(User user) {
         return clientOrderDAO.getClientOrder(user.getUserID());
     }
 
+    @Override
     public double topUp(Long userID, Double chargeAmount) {
         return clientRepository.changeBalance(userID, chargeAmount);
     }
 
+    @Override
     public void insertRequest(User loggedUser, String persons, String roomClass, String dateFilter) {
         Date dateFromSQL = convertStringToSqlDate(dateFilter.split(":")[0].trim());
         Date dateToSQL = convertStringToSqlDate(dateFilter.split(":")[1].trim());
         requestRepository.insertRequest(loggedUser.getUserID(), persons, roomClass, dateFromSQL, dateToSQL, OrderStatus.WAITING_FOR_APPROVAL.name());
     }
 
+    @Override
     public void cancelRequest(String requestID) {
         requestRepository.deleteById(Integer.parseInt(requestID));
     }
 
+    @Override
     public User getClient(Long userID) {
         return clientRepository.getById(userID);
     }

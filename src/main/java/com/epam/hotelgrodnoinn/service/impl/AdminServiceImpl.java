@@ -6,6 +6,7 @@ import com.epam.hotelgrodnoinn.dao.OrderDAO;
 import com.epam.hotelgrodnoinn.entity.ClientOrderView;
 import com.epam.hotelgrodnoinn.entity.ClientRequestView;
 import com.epam.hotelgrodnoinn.entity.OrderInvoiceForm;
+import com.epam.hotelgrodnoinn.service.IAdminService;
 import com.epam.hotelgrodnoinn.types.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ import java.util.List;
 
 
 @Component
-public class AdminServiceImpl {
+public class AdminServiceImpl implements IAdminService {
 
     @Autowired
     private ClientOrderDAO clientOrderDAO;
@@ -40,18 +41,22 @@ public class AdminServiceImpl {
         return dateSQL;
     }
 
+    @Override
     public List<ClientOrderView> getAllOrders() {
         return clientOrderDAO.getAllOrders();
     }
 
+    @Override
     public List<ClientRequestView> getAllRequestsForAdmin() {
         return clientRequestDAO.getClientRequests();
     }
 
+    @Override
     public ClientRequestView getClientRequest(String requestID, String email) {
         return clientOrderDAO.getClientRequestByIdAndEmail(Integer.parseInt(requestID), email);
     }
 
+    @Override
     @Transactional
     public void insertNewOrder(String clientID, String requestID, String[] singleRoomsSelected, String[] doubleRoomsSelected, String[] suiteRoomsSelected, String[] deluxeRoomsSelected, String dateFrom, String dateTo) {
         ArrayList<OrderInvoiceForm> orders = new ArrayList<>();
@@ -71,7 +76,8 @@ public class AdminServiceImpl {
         }
     }
 
-    private void addOrder(String[] roomsSelected, String dateFrom, String dateTo, ArrayList<OrderInvoiceForm> clientOrderRooms) {
+    @Override
+    public void addOrder(String[] roomsSelected, String dateFrom, String dateTo, ArrayList<OrderInvoiceForm> clientOrderRooms) {
         Date dateFromSQL = convertStringToSqlDate(dateFrom);
         Date dateToSQL = convertStringToSqlDate(dateTo);
         if (roomsSelected != null && roomsSelected.length != 0) {
@@ -81,6 +87,7 @@ public class AdminServiceImpl {
         }
     }
 
+    @Override
     public void rejectRequest(int requestID) {
         clientRequestDAO.changeStatusOfRequest(requestID,OrderStatus.REJECTED.name());
     }

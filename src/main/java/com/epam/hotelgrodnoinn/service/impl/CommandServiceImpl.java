@@ -1,5 +1,6 @@
 package com.epam.hotelgrodnoinn.service.impl;
 
+import com.epam.hotelgrodnoinn.service.ICommandService;
 import com.epam.hotelgrodnoinn.utility.JsonFileHandler;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 @Component
-public class CommandServiceImpl {
+public class CommandServiceImpl implements ICommandService {
     public static final String JSON = "./src/main/resources/factory/command.json";
     public static final String ROLE = "role";
     private final JsonFileHandler jsonFileHandler;
@@ -23,6 +24,7 @@ public class CommandServiceImpl {
      * @param command String name of the command.
      * @return a role of the specific command.
      */
+    @Override
     public String getCommandRole(String command) throws IOException {
 
         return ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(command)).get(ROLE).toString();

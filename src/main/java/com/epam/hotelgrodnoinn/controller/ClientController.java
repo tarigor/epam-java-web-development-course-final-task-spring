@@ -1,8 +1,8 @@
 package com.epam.hotelgrodnoinn.controller;
 
 import com.epam.hotelgrodnoinn.entity.User;
-import com.epam.hotelgrodnoinn.service.impl.ClientServiceImpl;
-import com.epam.hotelgrodnoinn.service.impl.OrderServiceImpl;
+import com.epam.hotelgrodnoinn.service.IClientService;
+import com.epam.hotelgrodnoinn.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +17,9 @@ public class ClientController extends BaseController {
     public static final String REGEX = "^(\\d+(\\.\\d+)?)$";
 
     @Autowired
-    private ClientServiceImpl clientService;
+    private IClientService clientService;
     @Autowired
-    private OrderServiceImpl orderService;
+    private IOrderService orderService;
 
     @RequestMapping(value = "/clientcabinet")
     public String goClientCabinet(HttpServletRequest request) {

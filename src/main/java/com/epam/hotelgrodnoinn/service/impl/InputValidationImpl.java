@@ -1,5 +1,6 @@
 package com.epam.hotelgrodnoinn.service.impl;
 
+import com.epam.hotelgrodnoinn.service.IInputValidation;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -9,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class InputValidationImpl {
+public class InputValidationImpl implements IInputValidation {
     public static final String PASSWORD_DOUBLE_CHECK = "passwordDoubleCheck";
     private ArrayList<String> fieldErrorList = new ArrayList<>();
 
+    @Override
     public ArrayList<String> doValidation(BindingResult bindingResult) {
 
         List<ObjectError> errorList = bindingResult.getAllErrors();
@@ -33,6 +35,7 @@ public class InputValidationImpl {
      * @param repeatedPassword a second time an inputted password.
      * @return a boolean result of the passwords comparision.
      */
+    @Override
     public boolean validatePasswordTwice(String password, String repeatedPassword) {
 
         fieldErrorList.clear();

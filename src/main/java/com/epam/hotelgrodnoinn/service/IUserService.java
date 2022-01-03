@@ -3,7 +3,7 @@ package com.epam.hotelgrodnoinn.service;
 import com.epam.hotelgrodnoinn.entity.User;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface UserService {
+public interface IUserService {
     @Transactional
     User getUserById(Long id);
 

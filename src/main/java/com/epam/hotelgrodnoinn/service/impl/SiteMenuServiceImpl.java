@@ -1,6 +1,7 @@
 package com.epam.hotelgrodnoinn.service.impl;
 
 import com.epam.hotelgrodnoinn.entity.Menu;
+import com.epam.hotelgrodnoinn.service.ISiteMenuService;
 import com.epam.hotelgrodnoinn.types.MenuItemDescription;
 import com.epam.hotelgrodnoinn.types.MenuRole;
 import com.epam.hotelgrodnoinn.utility.JsonFileHandler;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  * Provides the functionality of getting a specific menu item based on factory pattern.
  */
 @Component
-public class SiteMenuServiceImpl {
+public class SiteMenuServiceImpl implements ISiteMenuService {
 
     public static final String JSON = "./src/main/resources/factory/menu.json";
     public static final String ID = "id";
@@ -39,6 +40,7 @@ public class SiteMenuServiceImpl {
         }
     }
 
+    @Override
     public ArrayList<Menu> getMenuListCollectedByRoleSortedByID(MenuRole... menuRole) {
 
         ArrayList<Menu> sortedMenuListByRole = new ArrayList<>();
@@ -54,12 +56,13 @@ public class SiteMenuServiceImpl {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private Menu getMenu(String menuItem) throws IOException {
-
-        int id = Integer.parseInt(((LinkedHashMap) (jsonFileHandler.getMapFromJson().get(menuItem))).get(ID).toString());
-        String pageCommandName = ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(COMMAND).toString();
-        MenuItemDescription menuItemDescription = MenuItemDescription.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(MENU_ITEM_DESCRIPTION).toString());
-        MenuRole menuRole = MenuRole.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(ROLE).toString());
+    @Override
+    public Menu getMenu(String menuItem) throws IOException {
+        int id = Integer.parseInt(((LinkedHashMap) (jsonFileHandler.getMapFromJson().get(menuItem))).get(SiteMenuServiceImpl.ID).toString());
+        String pageCommandName = ((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(SiteMenuServiceImpl.COMMAND).toString();
+        MenuItemDescription menuItemDescription = MenuItemDescription.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(SiteMenuServiceImpl.MENU_ITEM_DESCRIPTION).toString());
+        MenuRole menuRole = MenuRole.valueOf(((LinkedHashMap) jsonFileHandler.getMapFromJson().get(menuItem)).get(SiteMenuServiceImpl.ROLE).toString());
         return new Menu(id, pageCommandName, menuItemDescription, menuRole);
     }
+
 }

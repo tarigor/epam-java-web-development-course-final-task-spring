@@ -1,8 +1,8 @@
 package com.epam.hotelgrodnoinn.controller;
 
 import com.epam.hotelgrodnoinn.entity.User;
-import com.epam.hotelgrodnoinn.service.UserService;
-import com.epam.hotelgrodnoinn.service.impl.InputValidationImpl;
+import com.epam.hotelgrodnoinn.service.IUserService;
+import com.epam.hotelgrodnoinn.service.IInputValidation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +20,10 @@ import java.util.ArrayList;
 public class CommonActivityController extends BaseController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Autowired
-    private InputValidationImpl inputValidation;
+    private IInputValidation inputValidation;
 
     @GetMapping("/")
     public String showHome() {
